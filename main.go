@@ -1,11 +1,13 @@
 package main
 
 import (
+	_ "backend/docs"
 	"backend/models"
 	"backend/routes"
 	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	echoSwagger "github.com/swaggo/echo-swagger"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -31,9 +33,13 @@ func main() {
 	fmt.Println(product)
 
 	e := echo.New()
+
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
-
+	e.GET(
+		"/swagger/*",
+		echoSwagger.WrapHandler,
+	)
 	routes.InitRouter(e, db)
 	// Start the server
 	err = e.Start(":8080")
