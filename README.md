@@ -33,3 +33,10 @@ go run main.go
 ```
 
 This will start the server on port 1323. You can access the API endpoints as per the Swagger documentation.
+
+## Frontend Setup and Start
+
+To start the frontend take a  look under the folder frontend
+
+[README.md Frontend](./frontend/README.md)
+
