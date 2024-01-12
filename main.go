@@ -35,7 +35,7 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	routes.InitRouter(e)
+	routes.InitRouter(e, db)
 	// Start the server
 	err = e.Start(":8080")
 	if err != nil {

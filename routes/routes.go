@@ -1,28 +1,44 @@
 package routes
 
 import (
+	"backend/controller"
 	"github.com/labstack/echo/v4"
+	"gorm.io/gorm"
 	"net/http"
 )
 
-func InitRouter(e *echo.Echo) {
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, Echo!")
-	})
+func InitRouter(e *echo.Echo, db *gorm.DB) {
 
-	e.GET("/products", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Products")
-	})
+	productHandler := controller.ProductHandler{Database: db}
 
-	e.POST("/products", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Product created")
-	})
+	e.GET(
+		"/",
+		func(c echo.Context) error {
+			return c.String(http.StatusOK, "Hello, Echo!")
+		},
+	)
 
-	e.GET("/votes", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Votes")
-	})
+	e.GET(
+		"/products",
+		productHandler.GetProducts,
+	)
 
-	e.POST("/votes", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Vote created")
-	})
+	e.POST(
+		"/products",
+		productHandler.CreateProduct,
+	)
+
+	e.GET(
+		"/votes",
+		func(c echo.Context) error {
+			return c.String(http.StatusOK, "Votes")
+		},
+	)
+
+	e.POST(
+		"/votes",
+		func(c echo.Context) error {
+			return c.String(http.StatusOK, "Vote created")
+		},
+	)
 }
