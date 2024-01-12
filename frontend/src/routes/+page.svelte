@@ -1,6 +1,6 @@
 <script lang="ts">
     import type {models_Product} from "../api_client";
-    import {ApiClient, DefaultService,} from "../api_client";
+    import {ApiClient,} from "../api_client";
 
     let products: models_Product[] = [];
 
