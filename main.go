@@ -21,15 +21,14 @@ func main() {
 		panic("failed to migrate database")
 	}
 
-	db.Create(&models.Product{ID: 1, Name: "Product 1", Description: "Description 1"})
+	db.Create(&models.Product{Name: "Product 1", Description: "Description 1"})
+	db.Create(&models.Product{Name: "Product 2", Description: "Description 2"})
+	db.Create(&models.Product{Name: "Product 3", Description: "Description 3"})
+	db.Create(&models.Product{Name: "Product 4", Description: "Description 4"})
 
 	var product models.Product
 	db.First(&product, 1)
 	fmt.Println(product)
-
-	db.Model(&product).Update("Name", "Product 1 updated")
-
-	db.Delete(&product)
 
 	e := echo.New()
 	e.Use(middleware.Logger())
