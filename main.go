@@ -2,8 +2,11 @@ package main
 
 import (
 	"fmt"
+	"github.com/labstack/echo/v4"
+	"github.com/labstack/echo/v4/middleware"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
+	"net/http"
 
 	"backend/models"
 )
@@ -28,4 +31,19 @@ func main() {
 	db.Model(&product).Update("Name", "Product 1 updated")
 
 	db.Delete(&product)
+
+	e := echo.New()
+	e.Use(middleware.Logger())
+	e.Use(middleware.Recover())
+
+	e.GET("/", func(c echo.Context) error {
+		return c.String(http.StatusOK, "Hello, Echo!")
+	})
+
+	// Start the server
+	err = e.Start(":8080")
+	if err != nil {
+		panic(err)
+	}
+
 }
