@@ -1,2 +1,13 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script lang="ts">
+    let products = [];
+
+    async function fetchProducts() {
+        const response = await fetch('/products');
+        products = await response.json();
+    }
+
+    fetchProducts();
+</script>
+
+<h1>Products</h1>
+<pre>{JSON.stringify(products, null, 2)}</pre>
