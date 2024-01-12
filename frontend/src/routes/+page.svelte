@@ -1,9 +1,15 @@
 <script lang="ts">
-    let products = [];
+    import type {models_Product} from "../api_client";
+    import {ApiClient, DefaultService,} from "../api_client";
+
+    let products: models_Product[] = [];
+
+    const appClient = new ApiClient({
+        BASE: 'http://localhost:8080',
+    });
 
     async function fetchProducts() {
-        const response = await fetch('/products');
-        products = await response.json();
+        products = await appClient.default.getAllProducts()
     }
 
     fetchProducts();
