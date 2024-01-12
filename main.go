@@ -1,14 +1,13 @@
 package main
 
 import (
+	"backend/models"
+	"backend/routes"
 	"fmt"
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"net/http"
-
-	"backend/models"
 )
 
 func main() {
@@ -36,10 +35,7 @@ func main() {
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, Echo!")
-	})
-
+	routes.InitRouter(e)
 	// Start the server
 	err = e.Start(":8080")
 	if err != nil {
