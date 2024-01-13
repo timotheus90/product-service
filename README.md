@@ -21,7 +21,7 @@ swag init --parseDependency --parseInternal --parseDepth 5 -g main.go
 After starting the server, you can view the Swagger UI at:
 
 ```
-http://localhost:1323/swagger/index.html
+http://localhost:8080/swagger/index.html
 ```
 
 ## Running the Server
